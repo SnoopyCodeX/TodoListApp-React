@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Lottie from 'lottie-react';
+import boredAnimation from '../../assets/bored-animation.json';
 import { SERVICE_URL, createTask, updateTask } from '../../services/task-service';
 import Task from '../../models/task';
 import TaskItem from '../TaskItem/TaskItem';
@@ -82,13 +84,13 @@ function TaskList() {
     };
 
     return (
-        <div className='container-fluid bg-light'>
-            <div className='container bg-light'>
-                <div className='row mt-4 ht-500'>
+        <div className='container-fluid bg-light-ct'>
+            <div className='container bg-light-ct'>
+                <div className='row mt-4 ht-500 bg-light-ct'>
 
                     <div className='col'></div>
 
-                    <div className='col-md-10 bg-light shadow'>
+                    <div className='col-md-10 bg-light-ct shadow'>
 
                         <div className="card bg-info mt-4">
                             <h4 className="text-white ps-3 pt-2 pb-2">Todo-List App</h4>
@@ -124,7 +126,16 @@ function TaskList() {
                                         deletedTasksCount += 1;
 
                                         if(deletedTasksCount >= tasks.length)
-                                            return (<center key={index} className='text-info'>You have no tasks to do...</center>);
+                                            return (
+                                                <div key={index}>
+                                                    <Lottie
+                                                        className="empty-list"
+                                                        animationData={boredAnimation}
+                                                        loop={true} />
+                                                    
+                                                    <center className='text-info'>You have no tasks to do...</center>
+                                                </div>
+                                            );
                                     }
 
                                     return (<div key={index}></div>);
