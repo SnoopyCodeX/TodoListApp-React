@@ -1,46 +1,46 @@
 import React, { useState } from 'react';
-import Task from '../../models/task';
+import Task from '../../models/tasks';
 import TaskItem from '../TaskItem/TaskItem';
 import TaskModal from '../TaskModal/TaskModal';
 
 function TaskList() {
-    const [task, setTask] = useState([]);
+    const [tasks, setTasks] = useState([]);
     const [name, setName] = useState("");
 
     const handleAddTask = () => {
         if(name.trim().length === 0) return;
 
         const newTask = new Task({
-            id: task.length + 1,
+            id: tasks.length + 1,
             taskName: name.trim(),
             isDone: false,
             isDeleted: false
         });
 
-        setTask((prevTasks) => [...prevTasks, newTask]);
+        setTasks((prevTasks) => [...prevTasks, newTask]);
         setName("");
     };
 
-    const handleDeleteTask = (id) => setTask(task.map(_task => {
-        if(_task.id === id)
-            _task.isDeleted = true;
+    const handleDeleteTask = (id) => setTasks(tasks.map((task) => {
+        if(task.id === id)
+            task.isDeleted = true;
 
-        return _task;
+        return task;
     }));
 
-    const handleUpdateNameTask = (id, newName) => setTask(task.map(_task => {
-        if(_task.id === id)
-            _task.taskName = newName;
+    const handleUpdateNameTask = (id, newName) => setTasks(tasks.map(task => {
+        if(task.id === id)
+            task.taskName = newName;
 
-        return _task;
+        return task;
     }));
 
     const handleUpdateStatusTask = (id) => {
-        setTask(task.map(_task => {
-            if(_task.id === id)
-                _task.isDone = !_task.isDone;
+        setTasks(tasks.map(task => {
+            if(task.id === id)
+                task.isDone = !task.isDone;
 
-            return _task;
+            return task;
         }));
     };
 
@@ -66,27 +66,27 @@ function TaskList() {
 
                         <div className="shadow">
                             <div className="input-group p-4">
-                            <input type="text" id='task-name-input' className="form-control" placeholder="Task name" value={name} onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
+                            <input type="text" id='tasks-name-input' className="form-control" placeholder="Task name" value={name} onChange={handleOnChange} onKeyUp={handleOnKeyUp} />
                             <button className="btn btn-outline-success" onClick={handleAddTask} >+</button>
                             </div>
                         </div>
 
                         <h4 className="text-info mt-4">Tasks: </h4>
 
-                        <div className='task-list'>
+                        <div className='tasks-list'>
                             <div className="m-3">
                             {
-                                task && task.map((_task, index) => {
-                                    if(!_task.isDeleted) {
+                                tasks && tasks.map((task, index) => {
+                                    if(!task.isDeleted) {
                                         return ( 
                                             <div key={index}>
                                                 <TaskItem 
-                                                    task={_task} 
+                                                    tasks={task} 
                                                     handleUpdateStatusTask={handleUpdateStatusTask} 
                                                     handleDeleteTask={handleDeleteTask} /> 
 
                                                 <TaskModal
-                                                    task={_task} 
+                                                    tasks={task} 
                                                     handleUpdateNameTask={handleUpdateNameTask} />
                                             </div>
                                         );
