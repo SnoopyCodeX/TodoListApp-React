@@ -12,3 +12,13 @@ html {
   overflow-y: auto; 
   height: 350px;
 }
+
+.bg-light-ct {
+  background-color: #fff;
+}
+
+.empty-list {
+  height: 350px;
+  max-height: 350px;
+  min-height: 350px;
+}
