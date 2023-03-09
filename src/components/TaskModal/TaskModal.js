@@ -14,7 +14,7 @@ function TaskModal({
     };
 
     return (
-        <div className="modal fade" id={`editTaskModal${task.id}`} tabindex="-1" aria-labelledby={`editTaskModalLabel${task.id}`} aria-hidden="true">
+        <div className="modal fade" id={`editTaskModal${task.id}`} tabIndex="-1" aria-labelledby={`editTaskModalLabel${task.id}`} aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
