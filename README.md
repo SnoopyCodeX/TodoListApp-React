@@ -13,6 +13,13 @@ serve -s build
 
 ### :house: Starting the app locally:
 
+Start json-server first:
+
+```bash
+json-server --watch src/tasks.json --port 3001
+```
+Then start the application:
+
 ```bash
 npm start
 ```
