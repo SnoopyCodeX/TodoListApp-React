@@ -108,38 +108,47 @@ function TaskList() {
                         <div className='tasks-list'>
                             <div className="m-3">
                             {
-                                tasks &&  tasks.map((task, index) => {
-                                    if(!task.isDeleted) {
-                                        return ( 
-                                            <div key={index}>
-                                                <TaskItem 
-                                                    task={task} 
-                                                    handleUpdateStatusTask={handleUpdateStatusTask} 
-                                                    handleDeleteTask={handleDeleteTask} /> 
-
-                                                <TaskModal
-                                                    task={task} 
-                                                    handleUpdateNameTask={handleUpdateNameTask} />
-                                            </div>
-                                        );
-                                    } else {
-                                        deletedTasksCount += 1;
-
-                                        if(deletedTasksCount >= tasks.length)
-                                            return (
+                                tasks && tasks.length > 0 
+                                    ? tasks.map((task, index) => {
+                                        if(!task.isDeleted) {
+                                            return ( 
                                                 <div key={index}>
-                                                    <Lottie
-                                                        className="empty-list"
-                                                        animationData={boredAnimation}
-                                                        loop={true} />
-                                                    
-                                                    <center className='text-info'>You have no tasks to do...</center>
+                                                    <TaskItem 
+                                                        task={task} 
+                                                        handleUpdateStatusTask={handleUpdateStatusTask} 
+                                                        handleDeleteTask={handleDeleteTask} /> 
+
+                                                    <TaskModal
+                                                        task={task} 
+                                                        handleUpdateNameTask={handleUpdateNameTask} />
                                                 </div>
                                             );
-                                    }
+                                        } else {
+                                            deletedTasksCount += 1;
 
-                                    return (<div key={index}></div>);
-                                }) 
+                                            if(deletedTasksCount >= tasks.length)
+                                                return (
+                                                    <div key={index}>
+                                                        <Lottie
+                                                            className="empty-list"
+                                                            animationData={boredAnimation}
+                                                            loop={true} />
+                                                        
+                                                        <center className='text-info'>You have no tasks to do...</center>
+                                                    </div>
+                                                );
+                                        }
+
+                                        return (<div key={index}></div>);
+                                    }) 
+                                    :   <div>
+                                            <Lottie
+                                                className="empty-list"
+                                                animationData={boredAnimation}
+                                                loop={true} />
+                                            
+                                            <center className='text-info'>You have no tasks to do...</center>
+                                        </div>
                             }
                             </div>
                         </div>
