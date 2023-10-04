@@ -1,4 +1,4 @@
-const SERVICE_URL = 'http://localhost:3001/tasks';
+const SERVICE_URL = process.env.SERVICE_URL;
 
 const createTask = (task) => {
     return fetch(SERVICE_URL, {
